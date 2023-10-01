@@ -6,6 +6,8 @@ const int leftLedPin = 2;
 const int rightLedPin = 3;
 const int upLedPin = 4;
 const int downLedPin = 5;
+const int rotationTime = 150;
+int times = 0;
 
 void setup()
 {
@@ -54,6 +56,10 @@ String getGestureName(uint16_t gesture)
     return "Left";
   case PAJ_RIGHT:
     return "Right";
+  case PAJ_CLOCKWISE:
+    return "CW";
+  case PAJ_COUNT_CLOCKWISE:
+    return "CCW";
   default:
     return "";
   }
@@ -65,4 +71,49 @@ void setLedState(uint16_t gesture)
   digitalWrite(leftLedPin, gesture == PAJ_LEFT);
   digitalWrite(rightLedPin, gesture == PAJ_RIGHT);
   digitalWrite(downLedPin, gesture == PAJ_DOWN);
+  if (gesture == PAJ_CLOCKWISE)
+  {
+    times = 0;
+    while (times < 3)
+    {
+      Serial.print("CW");
+      digitalWrite(leftLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(leftLedPin, LOW);
+      digitalWrite(upLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(upLedPin, LOW);
+      digitalWrite(rightLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(rightLedPin, LOW);
+      digitalWrite(downLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(downLedPin, LOW);
+      delay(rotationTime);
+      times = times + 1;
+    }
+  }
+  if (gesture == PAJ_COUNT_CLOCKWISE)
+  {
+    Serial.print("CCW");
+    times = 0;
+    while (times < 3)
+    {
+      Serial.print("CW");
+      digitalWrite(leftLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(leftLedPin, LOW);
+      digitalWrite(downLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(downLedPin, LOW);
+      digitalWrite(rightLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(rightLedPin, LOW);
+      digitalWrite(upLedPin, HIGH);
+      delay(rotationTime);
+      digitalWrite(upLedPin, LOW);
+      delay(rotationTime);
+      times = times + 1;
+    }
+  }
 }
