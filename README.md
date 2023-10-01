@@ -1,6 +1,14 @@
 # By Your Hand, control LEDs using PAJ7620 Sensor with Arduino
 Control LEDs using your hand with PAJ7620 and Arduino
 
+#### What are the detected directions in this code:
+* Up
+* Down
+* Left
+* Right
+* Clockwise
+* Counter Clockwise
+
 #### How to use this code:
 _Note_: Mentioned instructions below are applicable after building and wiring the complete circuit for PAJ7620 with Arduino.
 
